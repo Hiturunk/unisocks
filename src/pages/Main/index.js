@@ -15,6 +15,11 @@ import {
 import Body from '../Body'
 import Stats from '../Stats'
 import Status from '../Status'
+import { ChainId, Token, WETH, Fetcher, Trade, Route, TokenAmount, TradeType, Percent } from '@uniswap/sdk'
+
+const ROUTERVTWO = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+const SOCKS = new Token(1, "0x23b608675a2b2fb1890d3abbd85c5775c51691d5", 18)
+console.log(SOCKS);
 
 // denominated in bips
 const GAS_MARGIN = ethers.utils.bigNumberify(1000)
@@ -349,7 +354,6 @@ export default function Main({ stats, status }) {
       selectedTokenSymbol
     ]
   )
-
   async function buy(maximumInputValue, outputValue) {
     const deadline = Math.ceil(Date.now() / 1000) + DEADLINE_FROM_NOW
 
