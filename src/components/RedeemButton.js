@@ -53,11 +53,6 @@ export default function RedeemButton({ balanceSOCKS }) {
       />
       <Shim />
       <ButtonFrame
-        disabled={
-          account === null ||
-          !balanceSOCKS ||
-          balanceSOCKS.lt(ethers.utils.bigNumberify(10).pow(ethers.utils.bigNumberify(18)))
-        }
         text={'Redeem'}
         type={'secondary'}
         onClick={() => {

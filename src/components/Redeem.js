@@ -169,7 +169,7 @@ export default function Redeem({
           </Back>
         </>
       )
-    } else if (!hasBurnt) {
+    } else if (hasBurnt) {
       return (
         <>
           <TopFrame hasPickedAmount={hasPickedAmount}>

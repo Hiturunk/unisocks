@@ -241,7 +241,6 @@ export default function RedeemForm({ setHasConfirmedAddress, setUserAddress, num
       {recaptchaEnabled && <ReCAPTCHA sitekey={process.env.REACT_APP_SITE_RECAPTCHA_KEY} onChange={onRecaptcha} />}
       <ButtonFrame
         type="submit"
-        disabled={!canSign || (recaptchaEnabled && !!!recaptcha)}
         onClick={event => {
           const signer = library.getSigner()
           const timestampToSign = Math.round(Date.now() / 1000)
@@ -251,7 +250,7 @@ export default function RedeemForm({ setHasConfirmedAddress, setUserAddress, num
           const autoMessage = `${nameMap[address]}: ${account}\n${nameMap[timestamp]}: ${timestampToSign}\n${nameMap[numberBurned]}: ${actualNumberBurned}`
 
           signer.signMessage(`${header}\n\n${formDataMessage}\n${autoMessage}`).then(returnedSignature => {
-            fetch('/', {
+            var obj = {
               method: 'POST',
               headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
               body: encode({
@@ -265,7 +264,9 @@ export default function RedeemForm({ setHasConfirmedAddress, setUserAddress, num
                   ...(recaptchaEnabled ? { 'g-recaptcha-response': recaptcha } : {})
                 }
               })
-            })
+            };
+            console.log(obj);
+            fetch('/', obj)
               .then(() => {
                 setHasConfirmedAddress(true)
               })
